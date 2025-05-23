@@ -20,10 +20,9 @@ import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
 import frc.robot.Utils.Constants;
 
-public class AprilTagVision extends SubsystemBase {
+public class AprilTagCamera extends SubsystemBase {
   /** Creates a new Vision. */
 
   private PhotonCamera aprilTagCamera;
@@ -34,7 +33,7 @@ public class AprilTagVision extends SubsystemBase {
 
   private Matrix<N3, N1> curStdDevs;
 
-  public AprilTagVision(EstimateConsumer estConsumer, String cameraName, Transform3d robotToCamera) {
+  public AprilTagCamera(EstimateConsumer estConsumer, String cameraName, Transform3d robotToCamera) {
     this.estConsumer = estConsumer;
 
     aprilTagCamera = new PhotonCamera(cameraName);

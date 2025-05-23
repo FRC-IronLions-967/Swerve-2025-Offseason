@@ -98,6 +98,7 @@ public final class Constants {
 
     public static final String aprilTagCameraName1 = "aprilTagCameraName1";
     public static final String aprilTagCameraName2 = "aprilTagCameraName2";
+    public static final String objectDetectionCamera = "objectDetectionCamera";
 
     // The layout of the AprilTags on the field
     public static final AprilTagFieldLayout kTagLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
