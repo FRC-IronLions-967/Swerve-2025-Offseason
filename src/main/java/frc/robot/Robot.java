@@ -130,7 +130,6 @@ public class Robot extends LoggedRobot {
     // The first pose in an autonomous path is often a good choice.
     var startPose = new Pose2d(1, 1, new Rotation2d());
     SubsystemsInst.getInst().drivetrain.resetOdometry(startPose);
-    SubsystemsInst.getInst().vision.resetSimPose(startPose);
   }
 
   @Override
@@ -138,13 +137,6 @@ public class Robot extends LoggedRobot {
       switchBreakout.simulationPeriodic();
       // Update drivetrain simulation
       SubsystemsInst.getInst().drivetrain.simulationPeriodic();
-
-      // Update camera simulation
-      SubsystemsInst.getInst().vision.simulationPeriodic(SubsystemsInst.getInst().drivetrain.getSimPose());
-
-      var debugField = SubsystemsInst.getInst().vision.getSimDebugField();
-      debugField.getObject("EstimatedRobot").setPose(SubsystemsInst.getInst().drivetrain.getPose());
-      debugField.getObject("EstimatedRobotModules").setPoses(SubsystemsInst.getInst().drivetrain.getModulePoses());
 
 
       // // Calculate battery voltage sag due to current draw

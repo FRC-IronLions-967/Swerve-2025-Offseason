@@ -89,22 +89,20 @@ public final class Constants {
           m_frontLeftLocation, m_frontRightLocation, m_backLeftLocation, m_backRightLocation);
 
     // Vision Constants
-    //Cam mounted on the right front swerve module facing the reef when scoring.
-    public static final Transform3d kRobotToCamFront = 
-        new Transform3d(new Translation3d (Units.inchesToMeters(7.25), -Units.inchesToMeters(14.75), Units.inchesToMeters(9.1)), new Rotation3d(0.0,-0.349, 0.785));
-    public static final Transform3d kRobotToCamRear =
-        new Transform3d(new Translation3d(-0.235, 0.210, 0.176), new Rotation3d(0.0, -1.04, Math.PI)); 
+    public static final Transform3d robotToAprilTagCamera1 = 
+        new Transform3d(new Translation3d(0, 0, 0), new Rotation3d(0, 0, 0));
+    public static final Transform3d robotToAprilTagCamera2 = 
+        new Transform3d(new Translation3d(0, 0, 0), new Rotation3d(0, 0, 0));
+    public static final Transform3d robotToObjectDetectionCamera = 
+        new Transform3d(new Translation3d(0, 0, 0), new Rotation3d(0, 0, 0));
+
+    public static final String aprilTagCameraName1 = "aprilTagCameraName1";
+    public static final String aprilTagCameraName2 = "aprilTagCameraName2";
 
     // The layout of the AprilTags on the field
     public static final AprilTagFieldLayout kTagLayout = AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
-    public static final Pose3d kLeftRedStation = kTagLayout.getTagPose(1).get();
-    public static final Pose3d kRightRedStation = kTagLayout.getTagPose(2).get();
-    public static final Pose3d kLeftBlueStation = kTagLayout.getTagPose(13).get();
-    public static final Pose3d kRightBlueStation = kTagLayout.getTagPose(12).get();
 
-    // The standard deviations of our vision estimated poses, which affect correction rate
-    // (Fake values. Experiment and determine estimation noise on an actual robot.)
     public static final Matrix<N3, N1> kSingleTagStdDevs = VecBuilder.fill(4, 4, 8);
-    public static final Matrix<N3, N1> kMultiTagStdDevs = VecBuilder.fill(0.5, 0.5, 1);
+        public static final Matrix<N3, N1> kMultiTagStdDevs = VecBuilder.fill(0.5, 0.5, 1);
     
 }
