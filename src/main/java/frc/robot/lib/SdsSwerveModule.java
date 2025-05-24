@@ -10,8 +10,6 @@ import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 
-import org.littletonrobotics.junction.Logger;
-
 import com.revrobotics.sim.SparkMaxSim;
 import com.revrobotics.spark.SparkBase;
 import com.revrobotics.spark.SparkClosedLoopController;
@@ -155,8 +153,6 @@ public class SdsSwerveModule {
     // Optimize the reference state to avoid spinning further than 90 degrees
     // SwerveModuleState state = SwerveModuleState.optimize(desiredState, new Rotation2d(ConvertedTurningPosition()));//deprecated
     desiredState.optimize(new Rotation2d(ConvertedTurningPosition()));
-
-    double convertedPosition = MathUtil.angleModulus(desiredState.angle.getRadians()) + Math.PI;
 
     commandedWheelAngle = desiredState.angle.getRadians();
   //   turningMotorController.setReference(convertedPosition + Constants.swerveWheelOffset, ControlType.kPosition);

@@ -27,7 +27,7 @@ public class AprilTagCamera extends SubsystemBase {
 
   private PhotonCamera aprilTagCamera;
 
-  private PhotonPoseEstimator aprilTagPoseEstimator1;
+  private PhotonPoseEstimator aprilTagPoseEstimator;
 
   private EstimateConsumer estConsumer;
 
@@ -38,9 +38,9 @@ public class AprilTagCamera extends SubsystemBase {
 
     aprilTagCamera = new PhotonCamera(cameraName);
 
-    aprilTagPoseEstimator1 =
+    aprilTagPoseEstimator =
       new PhotonPoseEstimator(Constants.kTagLayout, PoseStrategy.MULTI_TAG_PNP_ON_COPROCESSOR, robotToCamera);
-    aprilTagPoseEstimator1.setMultiTagFallbackStrategy(PoseStrategy.LOWEST_AMBIGUITY);
+    aprilTagPoseEstimator.setMultiTagFallbackStrategy(PoseStrategy.LOWEST_AMBIGUITY);
 
 
   }
@@ -66,7 +66,7 @@ public class AprilTagCamera extends SubsystemBase {
 
             // Precalculation - see how many tags we found, and calculate an average-distance metric
             for (var tgt : targets) {
-                var tagPose = aprilTagPoseEstimator1.getFieldTags().getTagPose(tgt.getFiducialId());
+                var tagPose = aprilTagPoseEstimator.getFieldTags().getTagPose(tgt.getFiducialId());
                 if (tagPose.isEmpty()) continue;
                 numTags++;
                 avgDist +=
@@ -105,7 +105,7 @@ public class AprilTagCamera extends SubsystemBase {
 
     Optional<EstimatedRobotPose> visionEst = Optional.empty();
         for (var change : aprilTagCamera.getAllUnreadResults()) {
-            visionEst = aprilTagPoseEstimator1.update(change);
+            visionEst = aprilTagPoseEstimator.update(change);
             updateEstimationStdDevs(visionEst, change.getTargets());
 
             visionEst.ifPresent(
