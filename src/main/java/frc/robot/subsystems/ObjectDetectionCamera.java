@@ -5,9 +5,9 @@
 package frc.robot.subsystems;
 
 import org.photonvision.PhotonCamera;
-import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Utils.Constants;
 
@@ -23,16 +23,14 @@ public class ObjectDetectionCamera extends SubsystemBase {
 
   }
 
-  public PhotonTrackedTarget getBestTarget() {
-    return bestTarget;
+  public Rotation2d getRotation() {
+    return new Rotation2d(bestTarget.getPitch());
   }
 
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     var result = objectDetectionCamera.getAllUnreadResults();
-    for (PhotonPipelineResult i : result) {
-      bestTarget = i.getBestTarget();
-    }
+    bestTarget = result.get(0).getBestTarget();
   }
 }

@@ -18,6 +18,7 @@ import com.pathplanner.lib.controllers.PPHolonomicDriveController;
 import edu.wpi.first.hal.SimDouble;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.Matrix;
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.estimator.SwerveDrivePoseEstimator;
 import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
@@ -428,6 +429,22 @@ public class Drivetrain extends SubsystemBase {
       if ( DriverStation.isTeleop() ) {
         drive(xSpeed, ySpeed, -0.1 * rotation, fieldRelative);
       }
+  }
+
+    /**
+   * Drive the robot using sensor inputs for the rotation and driver input translation.
+   * @param rotation robot to object angle
+   * @param speed robot speed
+   */
+  public void moveTowardsObject(Rotation2d rotation, double speed) {
+
+    if ( DriverStation.isTeleop() ) {
+      drive(
+        Constants.kMaxSpeed * speed * Math.cos(rotation.getRadians()),
+        Constants.kMaxSpeed * speed * Math.sin(rotation.getRadians()),
+        Constants.robotAnglePIDController.calculate(rotation.getRadians(), 0), fieldRelative
+      );
+    }
   }
 
   

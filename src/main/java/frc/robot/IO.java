@@ -12,8 +12,8 @@ public class IO {
         driverController = new XBoxController(0);
         manipulatorController = new XBoxController(1);
         
-        //coralStationProximity = new Trigger(SubsystemsInst.getInst().drivetrain.nearRedCoral());
     }
+
 public static IO getInstance() {
     if(instance == null) instance = new IO();
 
